@@ -41,7 +41,7 @@ Status add_to_start(List_ptr list, Element element)
 
   Node_ptr previous_node = list->first;
   list->first = new_node;
-  list->first->next = previous_node;
+  new_node->next = previous_node;
   list->length++;
   
   return Success;
