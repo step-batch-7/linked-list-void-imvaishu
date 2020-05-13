@@ -1,6 +1,3 @@
-  
-#include <stdio.h>
-#include <stdlib.h>
 #include "linkedlist.h"
 
 List_ptr create_list(void)
@@ -11,4 +8,41 @@ List_ptr create_list(void)
   linkedList->last = NULL;
   linkedList->length = 0;
   return linkedList;
+}
+
+Node *create_node(Element element)
+{
+  Node *node = malloc(sizeof(Node));
+  node->element = element;
+  node->next = NULL;
+  return node;
+}
+
+Status add_to_list(List_ptr list, Element element)
+{
+  Node_ptr new_node = create_node(element);
+  if (list->first == NULL)
+  {
+    list->first = new_node;
+  }
+  else
+  {
+    list->last->next = new_node;
+  }
+  list->last = new_node;
+  list->length++;
+
+  return Success;
+}
+
+Status add_to_start(List_ptr list, Element element)
+{
+  Node_ptr new_node = create_node(element);
+  
+  Node_ptr previous_node = list->first;
+  list->first = new_node;
+  list->first->next = previous_node;
+  list->length++;
+  
+  return Success;
 }
