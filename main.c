@@ -19,6 +19,13 @@ char take_operation_to_perform(void)
   return option;
 }
 
+void take_position(int *value)
+{
+  printf("Please enter position\n");
+  scanf("%d",value);
+  while ((getchar()) != '\n'); 
+}
+
 void *take_int_input()
 {
   int input;
@@ -32,6 +39,7 @@ void *take_int_input()
 Status choose_operation(List_ptr list,char operation)
 {
  Element value;
+ int position;
  switch (operation)
   {
   case 'a':
@@ -42,6 +50,11 @@ Status choose_operation(List_ptr list,char operation)
     value = take_int_input();
     return add_to_start(list,value);
     break;
+  case 'c':
+    value = take_int_input();
+    take_position(&position);
+    return insert_at(list,value,position);
+    break;  
   }
  return Failure;
 }
