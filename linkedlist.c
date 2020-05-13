@@ -38,10 +38,14 @@ Status add_to_list(List_ptr list, Element element)
 Status add_to_start(List_ptr list, Element element)
 {
   Node_ptr new_node = create_node(element);
-
+  if(list->first == NULL){
+    list->first = new_node;
+    list->last = new_node;
+  } else {
   Node_ptr previous_node = list->first;
   list->first = new_node;
   new_node->next = previous_node;
+  }
   list->length++;
   
   return Success;

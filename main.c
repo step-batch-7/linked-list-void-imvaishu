@@ -54,7 +54,7 @@ Status choose_operation(List_ptr list,char operation)
     value = take_int_input();
     take_position(&position);
     return insert_at(list,value,position);
-    break;  
+    break;
   }
  return Failure;
 }
