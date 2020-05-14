@@ -99,3 +99,19 @@ void display(List_ptr list,ElementProcessor elementProcessor)
   }
   printf("\n");
 }
+
+Element remove_from_start(List_ptr list)
+{
+  Node_ptr first_element = list->first;
+  if(list->first == NULL)
+  {
+    return NULL;
+  }
+  if(list->length == 1)
+  {
+    list->last = NULL;
+  }
+  list->first = first_element->next;
+  list->length--;
+  return first_element;
+}

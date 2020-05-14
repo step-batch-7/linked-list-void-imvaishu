@@ -53,6 +53,10 @@ void choose_operation(List_ptr list,char operation)
       add_unique(list,value,&is_int_equal);
       break;
 
+    case 'e':
+      remove_from_start(list);
+      break;
+
     case 'l':
       display(list,&print_int);
       break;
