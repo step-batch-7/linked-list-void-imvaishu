@@ -26,6 +26,13 @@ Status is_int_equal(Element num1,Element num2)
   return *(int *)num1 == *(int *)num2;
 }
 
+Element increment(Element data)
+{
+  int *number = malloc(sizeof(int));
+  *number = *(int *)data + 1;
+  return number;
+}
+
 Element add(Element num1,Element num2)
 {
   int *result = malloc(sizeof(int));
@@ -37,6 +44,7 @@ void choose_operation(List_ptr list,char operation)
 {
   Element value;
   int position;
+  List_ptr mapped_elements;
   switch(operation)
   {
     case 'a':
@@ -90,13 +98,18 @@ void choose_operation(List_ptr list,char operation)
       print_int(result);
       printf("\n");
       break;
-
+    
     case 'k':
       clear_list(list);
       break;
 
     case 'l':
       display(list,&print_int);
+      break;
+
+    case 'n':
+      mapped_elements = map(list,&increment);
+      display(mapped_elements,&print_int);
       break;
 
     case 'm':

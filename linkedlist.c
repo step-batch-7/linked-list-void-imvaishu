@@ -218,6 +218,18 @@ Status clear_list(List_ptr list)
   return Success;
 }
 
+List_ptr map(List_ptr list, Mapper mapper)
+{
+  List_ptr mapped_elements = create_list();
+  Node_ptr p_walk = list->first;
+  for(int i = 0; i < list->length; i++)
+  {
+    add_to_list(mapped_elements,mapper(p_walk->element));
+    p_walk = p_walk->next;
+  }
+  return mapped_elements;
+}
+
 Element reduce(List_ptr list, Element init, Reducer reducer)
 {
   Node_ptr p_walk = list->first;
