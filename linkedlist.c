@@ -102,7 +102,6 @@ void display(List_ptr list,ElementProcessor elementProcessor)
 
 Element remove_from_start(List_ptr list)
 {
-  Node_ptr first_element = list->first;
   if(list->first == NULL)
   {
     return NULL;
@@ -111,11 +110,11 @@ Element remove_from_start(List_ptr list)
   {
     list->last = NULL;
   }
+  Node_ptr first_element = list->first;
   list->first = first_element->next;
   list->length--;
-  return first_element;
+  return first_element->element;
 }
-
 
 Element remove_from_end(List_ptr list)
 {
@@ -172,7 +171,7 @@ Element remove_at(List_ptr list, int position)
   }
   previous_element->next = p_walk;
   list->length--;
-  return remove_element;
+  return remove_element->element;
 }
 
 Element remove_first_occurrence(List_ptr list, Element element, Matcher matcher)
