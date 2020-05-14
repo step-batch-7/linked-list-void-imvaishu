@@ -127,9 +127,9 @@ Element remove_from_end(List_ptr list)
   {
    return remove_from_start(list);
   }
-  Node_ptr previous_element = list->first;
   Node_ptr p_walk = list->first;
-  int position = 0;
+  Node_ptr previous_element = p_walk;
+  int position = 1;
   while(position < list->length)
   {
     previous_element = p_walk;
@@ -144,9 +144,7 @@ Element remove_from_end(List_ptr list)
 
 Element remove_at(List_ptr list, int position)
 {
-  Node_ptr p_walk = list->first;
-  Node_ptr previous_element;
-  Node_ptr remove_element;
+  
   if(position < 0 || position >= list->length)
   {
     return NULL;
@@ -159,19 +157,18 @@ Element remove_at(List_ptr list, int position)
   {
     return remove_from_end(list);
   }
+
+  Node_ptr p_walk = list->first;
+  Node_ptr previous_element = p_walk;
   int count = 0;
-  while(count <= position){
-    if(count == position - 1)
-    {
-     previous_element = p_walk;
-     remove_element = p_walk->next;
-    }
+  while(count < position){
+    previous_element = p_walk;
     p_walk = p_walk->next;
     count++;
   }
-  previous_element->next = p_walk;
+  previous_element->next = p_walk->next;
   list->length--;
-  return remove_element->element;
+  return p_walk->element;
 }
 
 Element remove_first_occurrence(List_ptr list, Element element, Matcher matcher)
