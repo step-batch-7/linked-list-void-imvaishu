@@ -40,11 +40,16 @@ Element add(Element num1,Element num2)
   return result;
 }
 
+Status is_num_even(Element data)
+{
+  return !(*(int *)data % 2);
+}
+
 void choose_operation(List_ptr list,char operation)
 {
   Element value;
   int position;
-  List_ptr mapped_elements;
+  List_ptr elements;
   switch(operation)
   {
     case 'a':
@@ -108,9 +113,14 @@ void choose_operation(List_ptr list,char operation)
       break;
 
     case 'n':
-      mapped_elements = map(list,&increment);
-      display(mapped_elements,&print_int);
+      elements = map(list,&increment);
+      display(elements,&print_int);
       break;
+
+    case 'o':
+      elements = filter(list,&is_num_even);
+      display(elements,&print_int);
+      break;  
 
     case 'm':
       printf("done");

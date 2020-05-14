@@ -230,6 +230,21 @@ List_ptr map(List_ptr list, Mapper mapper)
   return mapped_elements;
 }
 
+List_ptr filter(List_ptr list, Predicate predicate)
+{
+  List_ptr filtered_elements = create_list();
+  Node_ptr p_walk = list->first;
+  for(int i = 0; i < list->length; i++)
+  {
+    if(predicate(p_walk->element))
+    {
+      add_to_list(filtered_elements,p_walk->element);
+    }
+    p_walk = p_walk->next;
+  }
+  return filtered_elements;
+}
+
 Element reduce(List_ptr list, Element init, Reducer reducer)
 {
   Node_ptr p_walk = list->first;
