@@ -188,3 +188,19 @@ Element remove_first_occurrence(List_ptr list, Element element, Matcher matcher)
   }
   return NULL;
 }
+
+Status clear_list(List_ptr list)
+{
+  Node_ptr p_walk = list->first;
+  Node_ptr clear_element = NULL;
+  while(p_walk != NULL)
+  {
+    clear_element = p_walk;
+    p_walk = p_walk->next;
+    free(clear_element);
+  }
+  list->first = NULL;
+  list->last = NULL;
+  list->length = 0;
+  return Success;
+}
