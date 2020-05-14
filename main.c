@@ -57,6 +57,10 @@ void choose_operation(List_ptr list,char operation)
       remove_from_start(list);
       break;
 
+    case 'f':
+      remove_from_end(list);
+      break;
+
     case 'l':
       display(list,&print_int);
       break;
