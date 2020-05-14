@@ -186,16 +186,32 @@ Element remove_first_occurrence(List_ptr list, Element element, Matcher matcher)
   return NULL;
 }
 
+int get_index(List_ptr list , Element num2, Matcher matcher)
+{
+  int index = 0;
+  Node_ptr p_walk = list->first;
+  while(p_walk != NULL)
+  {
+   if(matcher(p_walk->element, num2))
+   {
+    return index;
+   }
+   index++;
+   p_walk = p_walk->next;
+  }
+  return index;
+}
+
 List_ptr remove_all_occurrences(List_ptr list, Element element, Matcher matcher)
 {
   List_ptr removed_elements = create_list();
   Node_ptr p_walk = list->first;
-  for(int index = 0 ; index < list->length ; index++)
+  while(p_walk != NULL)
   {
     if(matcher(p_walk->element,element))
     {
-       add_to_start(removed_elements, remove_at(list,index));
-       index -= 1;
+      int index = get_index(list,element,matcher);
+      add_to_list(removed_elements, remove_at(list,index));
     }
     p_walk = p_walk->next;
   }
