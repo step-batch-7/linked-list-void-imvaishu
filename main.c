@@ -1,75 +1,80 @@
 #include "linkedlist.h"
 
-void display_done(Status current_status) {
-  if(current_status == 1){
-  printf("Done\n");
-  }
-  else
-  {
-  printf("Fail\n");
-  }
-} 
-
-char take_operation_to_perform(void)
-{
-  char option;
-  printf("Please enter the alphabet of the operation you would like to perform\n");
-  scanf("%c", &option);
-  while ((getchar()) != '\n');
-  return option;
-}
-
 void take_position(int *value)
 {
   printf("Please enter position\n");
-  scanf("%d",value);
-  while ((getchar()) != '\n'); 
+  scanf(" %d",value);
 }
 
-void *take_int_input()
+Element take_int_input()
 {
   int input;
   int *number = malloc(sizeof(int));
   printf("Please enter number\n");
-  scanf("%d",&input);
-  while ((getchar()) != '\n'); 
+  scanf(" %d",&input);
+  *number = input;
   return number;
 }
 
-Status choose_operation(List_ptr list,char operation)
+void print_int(Element data)
 {
- Element value;
- int position;
- switch (operation)
+  printf("%d ",*(int *)data);
+}
+
+Status is_int_equal(Element num1,Element num2)
+{
+  return *(int *)num1 == *(int *)num2;
+}
+
+void choose_operation(List_ptr list,char operation)
+{
+  Element value;
+  int position;
+  switch(operation)
   {
-  case 'a':
-    value = take_int_input();
-    return add_to_list(list, value);
-    break;
-  case 'b':
-    value = take_int_input();
-    return add_to_start(list,value);
-    break;
-  case 'c':
-    value = take_int_input();
-    take_position(&position);
-    return insert_at(list,value,position);
-    break;
+    case 'a':
+      value = take_int_input();
+      add_to_list(list,value);
+      break;
+    
+    case 'b':
+      value = take_int_input();
+      add_to_start(list,value);
+      break;
+
+    case 'c':
+      value = take_int_input();
+      take_position(&position);
+      insert_at(list,value,position);
+      break;
+
+    case 'd':
+      value = take_int_input();
+      add_unique(list,value,&is_int_equal);
+      break;
+
+    case 'l':
+      display(list,&print_int);
+      break;
+
+    case 'm':
+      printf("done");
+      break;  
+
+    default :
+      printf("option not given");
+      break;
   }
- return Failure;
 }
 
 int main(void)
 {
   List_ptr list = create_list();
-  char operation = take_operation_to_perform();
-  Status status = 1;
+  char operation;
   while(operation != 'm')
   {
-  status = choose_operation(list,operation);
-  display_done(status);
-  operation = take_operation_to_perform();
+   scanf(" %c", &operation);
+   choose_operation(list,operation);
   }
-  display_done(status);
   return 0;
 }
