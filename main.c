@@ -66,6 +66,11 @@ void choose_operation(List_ptr list,char operation)
       remove_at(list,position);
       break;
 
+    case 'h':
+      value = take_int_input();
+      remove_first_occurrence(list,value,&is_int_equal);
+      break;
+
     case 'l':
       display(list,&print_int);
       break;
