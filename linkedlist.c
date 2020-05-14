@@ -145,3 +145,35 @@ Element remove_from_end(List_ptr list)
   list->length--;
   return last_element;
 }
+
+Element remove_at(List_ptr list, int position)
+{
+  Node_ptr p_walk = list->first;
+  Node_ptr previous_element;
+  Node_ptr remove_element;
+  if(position < 0 || position >= list->length)
+  {
+    return NULL;
+  }
+  if(position == 0)
+  {
+    return remove_from_start(list); 
+  }
+  if(position == (list->length - 1))
+  {
+    return remove_from_end(list);
+  }
+  int count = 0;
+  while(count <= position){
+    if(count == position - 1)
+    {
+     previous_element = p_walk;
+     remove_element = p_walk->next;
+    }
+    p_walk = p_walk->next;
+    count++;
+  }
+  previous_element->next = p_walk;
+  list->length--;
+  return remove_element;
+}

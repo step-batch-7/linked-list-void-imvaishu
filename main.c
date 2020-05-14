@@ -61,6 +61,11 @@ void choose_operation(List_ptr list,char operation)
       remove_from_end(list);
       break;
 
+    case 'g':
+      take_position(&position);
+      remove_at(list,position);
+      break;
+
     case 'l':
       display(list,&print_int);
       break;
