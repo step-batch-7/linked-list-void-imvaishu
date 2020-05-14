@@ -45,6 +45,11 @@ Status is_num_even(Element data)
   return !(*(int *)data % 2);
 }
 
+void increment_by_2(Element data)
+{
+  *(int *)data += 2;
+}
+
 void choose_operation(List_ptr list,char operation)
 {
   Element value;
@@ -120,6 +125,11 @@ void choose_operation(List_ptr list,char operation)
     case 'o':
       elements = filter(list,&is_num_even);
       display(elements,&print_int);
+      break;  
+
+    case 'p':
+      forEach(list,&increment_by_2);
+      display(list,&print_int);
       break;  
 
     case 'm':

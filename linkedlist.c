@@ -255,3 +255,13 @@ Element reduce(List_ptr list, Element init, Reducer reducer)
   }
   return init;
 }
+
+void forEach(List_ptr list, ElementProcessor processor)
+{
+  Node_ptr p_walk = list->first;
+  for(int i = 0; i < list->length; i++)
+  {
+    processor(p_walk->element);
+    p_walk = p_walk->next;
+  }
+}
