@@ -71,6 +71,12 @@ void choose_operation(List_ptr list,char operation)
       remove_first_occurrence(list,value,&is_int_equal);
       break;
 
+     case 'i':
+      value = take_int_input();
+      List_ptr removed_elements = remove_all_occurrences(list,value,&is_int_equal);
+      display(removed_elements,&print_int);
+      break;
+
     case 'k':
       clear_list(list);
       break;
