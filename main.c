@@ -132,6 +132,11 @@ void choose_operation(List_ptr list,char operation)
       display(list,&print_int);
       break;  
 
+    case 'q':
+      elements = reverse(list);
+      display(elements,&print_int);
+      break;
+
     case 'm':
       printf("done");
       break;  
