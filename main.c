@@ -26,6 +26,13 @@ Status is_int_equal(Element num1,Element num2)
   return *(int *)num1 == *(int *)num2;
 }
 
+Element add(Element num1,Element num2)
+{
+  int *result = malloc(sizeof(int));
+  *result = *(int *)num1 + *(int *)num2;
+  return result;
+}
+
 void choose_operation(List_ptr list,char operation)
 {
   Element value;
@@ -75,6 +82,13 @@ void choose_operation(List_ptr list,char operation)
       value = take_int_input();
       List_ptr removed_elements = remove_all_occurrences(list,value,&is_int_equal);
       display(removed_elements,&print_int);
+      break;
+
+    case 'j':
+      value = take_int_input();
+      Element result = reduce(list,value,&add);
+      print_int(result);
+      printf("\n");
       break;
 
     case 'k':

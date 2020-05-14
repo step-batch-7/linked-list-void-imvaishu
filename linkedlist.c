@@ -217,3 +217,14 @@ Status clear_list(List_ptr list)
   list->length = 0;
   return Success;
 }
+
+Element reduce(List_ptr list, Element init, Reducer reducer)
+{
+  Node_ptr p_walk = list->first;
+  for(int i = 0; i < list->length; i++)
+  {
+    init = reducer(init,p_walk->element);
+    p_walk = p_walk->next;
+  }
+  return init;
+}
