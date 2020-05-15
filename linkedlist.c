@@ -89,12 +89,12 @@ Status add_unique(List_ptr list, Element element, Matcher matcher)
     return add_to_list(list,element);
 }
 
-void display(List_ptr list,ElementProcessor elementProcessor)
+void display(List_ptr list,Print printer)
 {
   Node_ptr p_walk = list->first;
   while(p_walk != NULL)
   {
-    elementProcessor(p_walk->element);
+    printer(p_walk->element);
     p_walk = p_walk->next;
   }
   printf("\n");

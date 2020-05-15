@@ -50,31 +50,32 @@ void increment_by_2(Element data)
   *(int *)data += 2;
 }
 
-void choose_operation(List_ptr list,char operation)
+void choose_operation(List_ptr list,char operation,Int_input_taker input,Print printer)
 {
   Element value;
   int position;
   List_ptr elements;
+  Element result;
   switch(operation)
   {
     case 'a':
-      value = take_int_input();
+      value = input();
       add_to_list(list,value);
       break;
     
     case 'b':
-      value = take_int_input();
+      value = input();
       add_to_start(list,value);
       break;
 
     case 'c':
-      value = take_int_input();
+      value = input();
       take_position(&position);
       insert_at(list,value,position);
       break;
 
     case 'd':
-      value = take_int_input();
+      value = input();
       add_unique(list,value,&is_int_equal);
       break;
 
@@ -92,19 +93,19 @@ void choose_operation(List_ptr list,char operation)
       break;
 
     case 'h':
-      value = take_int_input();
+      value = input();
       remove_first_occurrence(list,value,&is_int_equal);
       break;
 
      case 'i':
-      value = take_int_input();
-      List_ptr removed_elements = remove_all_occurrences(list,value,&is_int_equal);
-      display(removed_elements,&print_int);
+      value = input();
+      elements = remove_all_occurrences(list,value,&is_int_equal);
+      display(elements,printer);
       break;
 
     case 'j':
-      value = take_int_input();
-      Element result = reduce(list,value,&add);
+      value = input();
+      result = reduce(list,value,&add);
       print_int(result);
       printf("\n");
       break;
@@ -114,27 +115,27 @@ void choose_operation(List_ptr list,char operation)
       break;
 
     case 'l':
-      display(list,&print_int);
+      display(list,printer);
       break;
 
     case 'n':
       elements = map(list,&increment);
-      display(elements,&print_int);
+      display(elements,printer);
       break;
 
     case 'o':
       elements = filter(list,&is_num_even);
-      display(elements,&print_int);
+      display(elements,printer);
       break;  
 
     case 'p':
       forEach(list,&increment_by_2);
-      display(list,&print_int);
+      display(list,printer);
       break;  
 
     case 'q':
       elements = reverse(list);
-      display(elements,&print_int);
+      display(elements,printer);
       break;
 
     case 'm':
@@ -154,7 +155,7 @@ int main(void)
   while(operation != 'm')
   {
    scanf(" %c", &operation);
-   choose_operation(list,operation);
+   choose_operation(list,operation,&take_int_input,&print_int);
   }
   return 0;
 }
